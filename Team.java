@@ -10,7 +10,7 @@ public class Team {
      * @return chance of winning
      */
     public double win(){
-
+        return 0.0;
     }
 
     /**

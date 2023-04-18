@@ -3,6 +3,7 @@
  */
 import java.util.Random;
 public class Simulator {
+    Random random = new Random();
     /**
      * simulates a game between two teams
      * @param a 1st Team object
@@ -17,7 +18,12 @@ public class Simulator {
             return false;
         }
         else{
-
+            if (random.nextBoolean()){
+                return true;
+            }
+            else{
+                return false;
+            }
         }
     }
 }
