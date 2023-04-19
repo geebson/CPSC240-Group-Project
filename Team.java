@@ -38,8 +38,4 @@ public class Team {
             e.printStackTrace();
         }
     }
-
-    public void addTeam(FileWriter myWriter) {
-
-    }
 }
