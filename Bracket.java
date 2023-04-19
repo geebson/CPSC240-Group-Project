@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -36,6 +38,20 @@ public class Bracket {
             teams.add(team);
         }
     }
+    public void saveWinners(){
+        File file = new File("winners.txt");
+        FileWriter myWriter = null;
+        try {
+            file.createNewFile();
+            myWriter=new FileWriter(file);
+            for (Team t:winners){
+                t.save(myWriter);
+            }
+            myWriter.write("\n");}
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void simulate(Simulator s){
         while (teams.size()>1){
@@ -48,6 +64,7 @@ public class Bracket {
                     winners.add(teams.get(i+1));
                 }
             }
+            teams=winners;
         }
     }
 }

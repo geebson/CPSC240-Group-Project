@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
  * represents a team
  */
@@ -10,6 +14,12 @@ public class Team {
         this.wins=wins;
         this.losses=losses;
     }
+    public void incrementWins(){
+        wins++;
+    }
+    public void incrementLosses(){
+        losses--;
+    }
 
     /**
      * calculates the chance of winning
@@ -21,9 +31,12 @@ public class Team {
 
     /**
      * Team writes itself to file
-     * @param filename
      */
-    public void save(String filename){
-
+    public void save(FileWriter myWriter){
+        try {
+        myWriter.write(name+" ("+wins+"-"+losses+")\n");}
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

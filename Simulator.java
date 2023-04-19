@@ -12,16 +12,24 @@ public class Simulator {
      */
     public boolean simulate(Team a,Team b){
         if(a.win()>b.win()){
+            a.incrementWins();
+            b.incrementLosses();
             return true;
         }
         else if(a.win()<b.win()){
+            b.incrementWins();
+            a.incrementLosses();
             return false;
         }
         else{
             if (random.nextBoolean()){
+                a.incrementWins();
+                b.incrementLosses();
                 return true;
             }
             else{
+                b.incrementWins();
+                a.incrementLosses();
                 return false;
             }
         }
