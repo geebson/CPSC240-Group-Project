@@ -977,21 +977,6 @@ public class Interface implements ActionListener {
 	}
 
 	/*******************************************************************************
-	 *
-	 * [8]... Adds add team button
-	 *
-	 *******************************************************************************/
-	public void addAddTeamButton() {
-		JButton addTeam = new JButton("Add Team");
-		addTeam.setBounds(705, 600, 100, 40);
-		this.addTeam = addTeam;
-		frame.add(addTeam);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLayout(null);
-		frame.setVisible(true);
-	}
-
-	/*******************************************************************************
 	 * 
 	 * [10]... this method prints a bunch of cool lines for the GUI
 	 * 
@@ -3328,15 +3313,10 @@ public class Interface implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
-		if (obj == submit) {
-			Team newTeam = new Team(nameField.getText(),Integer.parseInt(winField.getText()), Integer.parseInt(lossField.getText()));
-			newTeam.save(myWriter);
-		} else if (obj == shuffle) {
+		if (obj == shuffle) {
 
 		} else if (obj == simulate) {
 
-		} else if (obj == cancel) {
-			frame2.dispose();
 		} else if (obj == addTeam) {
 			addNewTeam();
 		}
