@@ -1,4 +1,3 @@
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -38,5 +37,9 @@ public class Team {
         catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void addTeam(FileWriter myWriter) {
+
     }
 }

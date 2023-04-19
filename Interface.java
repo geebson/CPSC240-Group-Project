@@ -1,8 +1,9 @@
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.FileWriter;
+import java.util.ArrayList;
 
 /***********************************************************************************
  ***********************************************************************************
@@ -19,8 +20,18 @@ import javax.swing.*;
  ***********************************************************************************
  ***********************************************************************************/
 
-public class Interface {
+public class Interface implements ActionListener {
 	JFrame frame;
+	JFrame frame2;
+	JButton submit;
+	JButton cancel;
+	JButton shuffle;
+	JButton simulate;
+	JButton addTeam;
+	JTextField nameField;
+	JTextField winField;
+	JTextField lossField;
+	private FileWriter myWriter;
 
 	// default constructor
 	public Interface() {
@@ -942,6 +953,7 @@ public class Interface {
 	public void addShuffleButton() {
 		JButton shuffle = new JButton("Shuffle");
 		shuffle.setBounds(705, 800, 100, 40);
+		this.shuffle = shuffle;
 		frame.add(shuffle);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(null);
@@ -956,11 +968,27 @@ public class Interface {
 	public void addSimulateButton() {
 		JButton simulate = new JButton("Simulate");
 		simulate.setBounds(705, 700, 100, 40);
+		this.simulate = simulate;
 		frame.add(simulate);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(null);
 		frame.setVisible(true);
 
+	}
+
+	/*******************************************************************************
+	 *
+	 * [8]... Adds add team button
+	 *
+	 *******************************************************************************/
+	public void addAddTeamButton() {
+		JButton addTeam = new JButton("Add Team");
+		addTeam.setBounds(705, 600, 100, 40);
+		this.addTeam = addTeam;
+		frame.add(addTeam);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLayout(null);
+		frame.setVisible(true);
 	}
 
 	/*******************************************************************************
@@ -3254,5 +3282,63 @@ public class Interface {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(null);
 		frame.setVisible(true);
+	}
+
+	public void addNewTeam() {
+		JFrame newTeamWindow = new JFrame();
+		frame2 = new JFrame("New Team");
+		frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		frame2.setPreferredSize(new Dimension(400, 400));
+		frame2.setVisible(true);
+		this.frame2 = frame2;
+
+		JLabel label1 = new JLabel("Team Name: ");
+		JLabel label2 = new JLabel("Wins: ");
+		JLabel label3 = new JLabel("Losses: ");
+
+		JTextField nameField = new JTextField();
+		JTextField winField = new JTextField();
+		JTextField lossField = new JTextField();
+
+		JButton submit = new JButton("Submit");
+		JButton cancel = new JButton("Cancel");
+
+		submit.addActionListener(this);
+		cancel.addActionListener(this);
+
+		this.nameField = nameField;
+		this.winField = winField;
+		this.lossField = lossField;
+		this.submit = submit;
+		this.cancel = cancel;
+		GridLayout layout = new GridLayout(0, 2);
+
+		frame2.setLayout(layout);
+		frame2.add(label1);
+		frame2.add(nameField);
+		frame2.add(label2);
+		frame2.add(winField);
+		frame2.add(label3);
+		frame2.add(lossField);
+		frame2.add(submit);
+		frame2.add(cancel);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object obj = e.getSource();
+		if (obj == submit) {
+			Team newTeam = new Team(nameField.getText(),Integer.parseInt(winField.getText()), Integer.parseInt(lossField.getText()));
+			newTeam.save(myWriter);
+		} else if (obj == shuffle) {
+
+		} else if (obj == simulate) {
+
+		} else if (obj == cancel) {
+			frame2.dispose();
+		} else if (obj == addTeam) {
+			addNewTeam();
+		}
 	}
 }
