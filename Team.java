@@ -1,11 +1,14 @@
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Random;
 
 /**
  * represents a team
  */
 public class Team {
+    Random random = new Random();
     private String name;
     private int wins;
     private int losses;
@@ -20,21 +23,25 @@ public class Team {
     public void incrementLosses(){
         losses--;
     }
+    public void output(){
+        System.out.println(name+" "+wins+" "+losses);
+    }
 
     /**
      * calculates the chance of winning
      * @return chance of winning
      */
     public double win(){
-        return 0.0;
+        int num = random.nextInt(-10,10);
+        return (wins-losses)+num;
     }
 
     /**
      * Team writes itself to file
      */
-    public void save(FileWriter myWriter){
+    public void save(BufferedWriter myWriter){
         try {
-        myWriter.write(name+" ("+wins+"-"+losses+")\n");}
+            myWriter.write(name+" ("+wins+"-"+losses+")\n");}
         catch (IOException e) {
             e.printStackTrace();
         }
