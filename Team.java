@@ -23,8 +23,8 @@ public class Team {
     public void incrementLosses(){
         losses--;
     }
-    public void output(){
-        System.out.println(name+" "+wins+" "+losses);
+    public String toString(){
+        return(name+" ("+wins+"-"+losses+")");
     }
 
     /**

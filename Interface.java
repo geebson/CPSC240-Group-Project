@@ -3317,8 +3317,6 @@ public class Interface implements ActionListener {
 
 		} else if (obj == simulate) {
 
-		} else if (obj == addTeam) {
-			addNewTeam();
 		}
 	}
 }
