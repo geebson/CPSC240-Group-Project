@@ -32,8 +32,8 @@ public class Team {
      * @return chance of winning
      */
     public double win(){
-        int num = random.nextInt(-10,10);
-        return (wins-losses)+num;
+        int upsetValue = random.nextInt(-10,10);
+        return (wins-losses)+upsetValue;
     }
 
     /**

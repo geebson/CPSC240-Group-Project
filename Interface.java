@@ -20,7 +20,7 @@ import java.util.ArrayList;
  ***********************************************************************************
  ***********************************************************************************/
 
-public class Interface implements ActionListener {
+public class Interface{
 	JFrame frame;
 	JFrame frame2;
 	JButton submit;
@@ -954,6 +954,7 @@ public class Interface implements ActionListener {
 		JButton shuffle = new JButton("Shuffle");
 		shuffle.setBounds(705, 800, 100, 40);
 		this.shuffle = shuffle;
+		shuffle.addActionListener(new ShuffleListener());
 		frame.add(shuffle);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(null);
@@ -969,10 +970,12 @@ public class Interface implements ActionListener {
 		JButton simulate = new JButton("Simulate");
 		simulate.setBounds(705, 700, 100, 40);
 		this.simulate = simulate;
+		simulate.addActionListener(new ButtonListener());
 		frame.add(simulate);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(null);
 		frame.setVisible(true);
+
 
 	}
 
@@ -3289,8 +3292,8 @@ public class Interface implements ActionListener {
 		JButton submit = new JButton("Submit");
 		JButton cancel = new JButton("Cancel");
 
-		submit.addActionListener(this);
-		cancel.addActionListener(this);
+		//submit.addActionListener(this);
+		//cancel.addActionListener(this);
 
 		this.nameField = nameField;
 		this.winField = winField;
@@ -3310,13 +3313,42 @@ public class Interface implements ActionListener {
 		frame2.add(cancel);
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		Object obj = e.getSource();
-		if (obj == shuffle) {
 
-		} else if (obj == simulate) {
-
+	public void Display(ArrayList<String> a, int round) {
+		if(round ==1){
+			displayRoundOne(a);
 		}
+		if (round == 2) {
+			displayRoundTwo(a);
+		}
+		else if(round==3){displayRoundThree(a);}
+		else if (round==4) {displayRoundFour(a);}
+		else if (round==5) {displayRoundFive(a);}
+		else if(round==6){displayChampionship(a);}
+		else{displayWinner(a);
+		}
+	}
+	public static void main(String[] args){
+		String filename = "teams.txt";
+		Simulator s = new Simulator();
+		Bracket b = new Bracket(filename);
+		Interface i = new Interface();
+
+		JFrame frame = new JFrame();
+		frame = new JFrame("March Madness");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		//frame.setSize(screenSize.width, screenSize.height);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		i.addSimulateButton();
+		frame.setVisible(true);
+		//this.frame = frame;
+
+		b.addTeams();
+		ArrayList<String> teamString=b.output();
+		i.cosmetic();
+		i.addSimulateButton();
+		i.addShuffleButton();
+		i.displayRoundOne(teamString);
 	}
 }
