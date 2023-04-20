@@ -8,9 +8,9 @@ import java.util.ArrayList;
 /***********************************************************************************
  ***********************************************************************************
  *
- * Date: April 19th CPSC 240 - Spring 2023. I pledge.
  * 
- * @author Josh Williams
+ * 
+ * 
  * 
  *         - GUI class file for the March Madness Tournament. Adds a bunch of
  *         cool cosmetic stuff for the program. Displays the results of the
