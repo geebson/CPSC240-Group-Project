@@ -12,7 +12,7 @@ public class ButtonListener implements ActionListener {
         b.addTeams();
         ArrayList<String> a = b.output();
         i.displayRoundOne(a);
-
+        b.createFile();
         for(int j=1;j<8;j++){
             int rounds = b.simulate(s);
             if (rounds<8){
@@ -23,5 +23,6 @@ public class ButtonListener implements ActionListener {
                 i.addShuffleButton();
             }
         }
+        b.closeFile();
     }
 }

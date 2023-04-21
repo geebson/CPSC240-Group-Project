@@ -8,7 +8,7 @@ import java.util.Scanner;
  */
 public class Bracket {
     int numRounds = 1;
-    File file = new File("1winners.txt");
+    File file = new File("winners.txt");
     BufferedWriter writer = null;
     ArrayList<Team> teams = new ArrayList<>();
     ArrayList<Team> winners = new ArrayList<>();
@@ -56,15 +56,7 @@ public class Bracket {
     }
 
 
-
-
-    /**
-     * calls simulator for all the games in the bracket and writes the winners to a file
-     *
-     * @param s object simulator
-     */
-    public int simulate(Simulator s) {
-        winners.clear();
+    public void createFile(){
         try {
             if (!file.exists()) {
                 file.createNewFile();
@@ -73,12 +65,29 @@ public class Bracket {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public void closeFile(){
+        try {
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * calls simulator for all the games in the bracket and writes the winners to a file
+     *
+     * @param s object simulator
+     */
+    public int simulate(Simulator s) {
+        winners.clear();
         //simulate the round
         round(s);
         //write the winners to a file
         for (Team t : winners) {
             t.save(writer);
         }
+        // new line between rounds of winners
         try {
             writer.write("\n");
         } catch (IOException e) {
@@ -87,11 +96,7 @@ public class Bracket {
         //clear the teams and add the winners to it
         teams.clear();
         teams.addAll(winners);
-        try {
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
         return numRounds;
     }
 

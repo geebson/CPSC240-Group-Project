@@ -3315,12 +3315,8 @@ public class Interface{
 
 
 	public void Display(ArrayList<String> a, int round) {
-		if(round ==1){
-			displayRoundOne(a);
-		}
-		if (round == 2) {
-			displayRoundTwo(a);
-		}
+		if(round ==1){displayRoundOne(a);}
+		else if (round == 2) {displayRoundTwo(a);}
 		else if(round==3){displayRoundThree(a);}
 		else if (round==4) {displayRoundFour(a);}
 		else if (round==5) {displayRoundFive(a);}
@@ -3342,7 +3338,7 @@ public class Interface{
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		i.addSimulateButton();
 		frame.setVisible(true);
-		//this.frame = frame;
+
 
 		b.addTeams();
 		ArrayList<String> teamString=b.output();
