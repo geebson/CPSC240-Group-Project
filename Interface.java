@@ -47,8 +47,8 @@ public class Interface {
 	}
 
 	public void displayRoundTwo(ArrayList<String> list) {
-		int startXLeft = 144;
-		int startXRight = 1268;
+		int startXLeft = 120;
+		int startXRight = 1295;
 		int startY = 13;
 		int gapY = 50;
 		int teamsPerColumn = 16;
@@ -189,24 +189,24 @@ public class Interface {
 	// Wrapper function for Round 1 Advance to Round 2
 	public void displayAdvanceRound2() {
 		// Left Side Labels
-		addSideBracketLines(100, 0, 25, 50, 20, 32, "--");
+		addSideBracketLines(100, 0, 25, 50, 20, 32, "-");
 
 		// Right Side Labels
-		addSideBracketLines(1388, 0, 25, 50, 20, 32, "--");
+		addSideBracketLines(1405, 0, 25, 50, 20, 32, "-");
 
 		// Left Side Bracket Lines
-		addSideBracketLines(114, 13, 50, 100, 20, 16, "|--");
+		addSideBracketLines(105, 13, 50, 100, 20, 16, "|-");
 
 		// Right Side Bracket Lines
-		addSideBracketLines(1370, 13, 50, 100, 20, 16, "--|");
+		addSideBracketLines(1394, 13, 50, 100, 20, 16, "-|");
 	}
 
 	public void displayAdvanceRound3() {
 		// Middle Left Horizontal Bracket Lines
-		addSideBracketLines(245, 13, 50, 100, 20, 16, "---");
+		addSideBracketLines(220, 13, 50, 100, 20, 16, "------");
 	
 		// Middle Right Horizontal Bracket Lines
-		addSideBracketLines(1245, 13, 50, 100, 20, 16, "---");
+		addSideBracketLines(1245, 13, 50, 100, 20, 16, "------");
 	
 		// Left Vertical Bracket Lines
 		addSideBracketLines(265, new int[]{20, 40, 57, 120, 140, 157, 220, 240, 257, 
@@ -412,8 +412,6 @@ public class Interface {
 		Simulator s = new Simulator();
 		Bracket b = new Bracket(filename);
 		Interface i = new Interface();
-	
-		// Use the frame created in the Interface constructor; maximize it if desired
 		i.frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 	
 		b.addTeams();
