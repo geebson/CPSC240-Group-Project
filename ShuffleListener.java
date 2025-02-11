@@ -12,7 +12,7 @@ public class ShuffleListener implements ActionListener {
         b.shuffle();
         ArrayList<String> a = b.output();
         i.displayRoundOne(a);
-        i.displayBoard();
+        i.cosmetic();
         i.addSimulateButton();
         i.addShuffleButton();
 

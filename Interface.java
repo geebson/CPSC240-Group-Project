@@ -17,6 +17,7 @@ public class Interface {
 	JTextField lossField;
 	private FileWriter myWriter;
 
+	// default constructor
 	public Interface() {
 		JFrame frame = new JFrame();
 		frame = new JFrame("March Madness");
@@ -28,10 +29,16 @@ public class Interface {
 	}
 
 	public void displayRoundOne(ArrayList<String> list) {
+		int startX = 0;
+		int startY = 0;
+		int gapY = 25;
+		int teamsPerColumn = 32;
+		int secondColumnX = 1410;
+
 		for (int i = 0; i < list.size(); i++) {
-			int x = (i < 32) ? 0 : 1410;  // Hardcoded column positions
-			int y = (i % 32) * 25;        // Hardcoded row spacing
-	
+			int x = (i < teamsPerColumn) ? startX : secondColumnX;
+			int y = startY + (i % teamsPerColumn) * gapY;
+
 			JTextField teamField = new JTextField(list.get(i));
 			teamField.setBounds(x, y, 100, 20);
 			teamField.setEditable(false);
@@ -40,33 +47,51 @@ public class Interface {
 	}
 
 	public void displayRoundTwo(ArrayList<String> list) {
+		int startXLeft = 144;
+		int startXRight = 1268;
+		int startY = 13;
+		int gapY = 50;
+		int teamsPerColumn = 16;
+
 		for (int i = 0; i < list.size(); i++) {
-			int x = (i < 16) ? 144 : 1268;  // Hardcoded left and right column positions
-			int y = 13 + (i % 16) * 50;     // Hardcoded row spacing
-	
+			int x = (i < teamsPerColumn) ? startXLeft : startXRight;
+			int y = startY + (i % teamsPerColumn) * gapY;
+
 			JTextArea textArea = new JTextArea(list.get(i));
 			textArea.setBounds(x, y, 100, 20);
 			textArea.setEditable(false);
 			frame.add(textArea);
 		}
 	}
-	
+
 	public void displayRoundThree(ArrayList<String> list) {
+		int startXLeft = 285;
+		int startXRight = 1127;
+		int startY = 40;
+		int gapY = 100;
+		int teamsPerColumn = 8;
+
 		for (int i = 0; i < list.size(); i++) {
-			int x = (i < 8) ? 285 : 1127;  // Hardcoded startXLeft and startXRight
-			int y = 40 + (i % 8) * 100;   // Hardcoded startY, teamsPerColumn, and gapY
-	
+			int x = (i < teamsPerColumn) ? startXLeft : startXRight;
+			int y = startY + (i % teamsPerColumn) * gapY;
+
 			JTextArea textArea = new JTextArea(list.get(i));
 			textArea.setBounds(x, y, 100, 20);
 			textArea.setEditable(false);
 			frame.add(textArea);
 		}
 	}
-	
+
 	public void displayRoundFour(ArrayList<String> list) {
+		int startXLeft = 425;
+		int startXRight = 987;
+		int startY = 95;
+		int gapY = 200;
+		int teamsPerColumn = 4;
+
 		for (int i = 0; i < list.size(); i++) {
-			int x = (i < 4) ? 425 : 987;
-			int y = 95 + (i % 4) * 200;
+			int x = (i < teamsPerColumn) ? startXLeft : startXRight;
+			int y = startY + (i % teamsPerColumn) * gapY;
 
 			JTextArea textArea = new JTextArea(list.get(i));
 			textArea.setBounds(x, y, 100, 20);
@@ -132,6 +157,7 @@ public class Interface {
 		frame.setVisible(true);
 	}
 
+	// Function for Horizontal Bracket Lines
 	public void addSideBracketLines(int startX, int startY, int gapY, int width, int height, int totalLabels,
 			String labelText) {
 		for (int i = 0; i < totalLabels; i++) {
@@ -141,6 +167,7 @@ public class Interface {
 		}
 	}
 
+	// Function for Vertical Bracket Lines (New Overloaded Method)
 	public void addSideBracketLines(int startX, int[] yPositions, int width, int height, String[] labels) {
 		for (int i = 0; i < yPositions.length; i++) {
 			JLabel label = new JLabel(labels[i]);
@@ -157,6 +184,7 @@ public class Interface {
 			frame.add(label);
 		}
 	}
+	
 
 	// Wrapper function for Round 1 Advance to Round 2
 	public void displayAdvanceRound2() {
@@ -176,125 +204,135 @@ public class Interface {
 	public void displayAdvanceRound3() {
 		// Middle Left Horizontal Bracket Lines
 		addSideBracketLines(245, 13, 50, 100, 20, 16, "---");
-
+	
 		// Middle Right Horizontal Bracket Lines
 		addSideBracketLines(1245, 13, 50, 100, 20, 16, "---");
-
+	
 		// Left Vertical Bracket Lines
-		addSideBracketLines(265, new int[] { 20, 40, 57, 120, 140, 157, 220, 240, 257,
-				320, 340, 357, 420, 440, 457, 520, 540,
-				557, 620, 640, 657, 720, 740, 757 }, 100, 20,
-				new String[] { "|", "|--", "|", "|", "|--", "|", "|", "|--", "|",
-						"|", "|--", "|", "|", "|--", "|", "|", "|--", "|",
-						"|", "|--", "|", "|", "|--", "|" });
-
+		addSideBracketLines(265, new int[]{20, 40, 57, 120, 140, 157, 220, 240, 257, 
+										   320, 340, 357, 420, 440, 457, 520, 540, 
+										   557, 620, 640, 657, 720, 740, 757}, 100, 20, 
+										   new String[]{"|", "|--", "|", "|", "|--", "|", "|", "|--", "|", 
+														"|", "|--", "|", "|", "|--", "|", "|", "|--", "|", 
+														"|", "|--", "|", "|", "|--", "|"});
+	
 		// Right Vertical Bracket Lines (Shift "--|" slightly left)
-		addSideBracketLines(1244, new int[] { 20, 40, 57, 120, 140, 157, 220, 240, 257,
-				320, 340, 357, 420, 440, 457, 520, 540,
-				557, 620, 640, 657, 720, 740, 757 }, 100, 20,
-				new String[] { "|", "--|", "|", "|", "--|", "|", "|", "--|", "|",
-						"|", "--|", "|", "|", "--|", "|", "|", "--|", "|",
-						"|", "--|", "|", "|", "--|", "|" },
-				1228);
+		addSideBracketLines(1244, new int[]{20, 40, 57, 120, 140, 157, 220, 240, 257, 
+										   320, 340, 357, 420, 440, 457, 520, 540, 
+										   557, 620, 640, 657, 720, 740, 757}, 100, 20, 
+										   new String[]{"|", "--|", "|", "|", "--|", "|", "|", "--|", "|", 
+														"|", "--|", "|", "|", "--|", "|", "|", "--|", "|", 
+														"|", "--|", "|", "|", "--|", "|"}, 1228);
 	}
-
+	
 	public void displayAdvanceRound4() {
 		// Left Side Horizontal Bracket Lines
 		addSideBracketLines(385, 40, 100, 100, 20, 8, "---");
-
+	
 		// Right Side Horizontal Bracket Lines
 		addSideBracketLines(1103, 40, 100, 100, 20, 8, "---");
-
+	
 		// Left Side Vertical Bracket Lines
-		addSideBracketLines(405, new int[] { 55, 75, 115, 133, 255, 275, 315, 333,
-				455, 475, 515, 533, 655, 675, 715, 733 },
-				100, 20, new String[] { "|", "|", "|", "|", "|", "|", "|", "|",
-						"|", "|", "|", "|", "|", "|", "|", "|" });
-
+		addSideBracketLines(405, new int[]{55, 75, 115, 133, 255, 275, 315, 333, 
+										   455, 475, 515, 533, 655, 675, 715, 733}, 
+										   100, 20, new String[]{"|", "|", "|", "|", "|", "|", "|", "|", 
+																  "|", "|", "|", "|", "|", "|", "|", "|"});
+	
 		// Right Side Vertical Bracket Lines
-		addSideBracketLines(1103, new int[] { 55, 75, 115, 133, 255, 275, 315, 333,
-				455, 475, 515, 533, 655, 675, 715, 733 },
-				100, 20, new String[] { "|", "|", "|", "|", "|", "|", "|", "|",
-						"|", "|", "|", "|", "|", "|", "|", "|" });
-
+		addSideBracketLines(1103, new int[]{55, 75, 115, 133, 255, 275, 315, 333, 
+											455, 475, 515, 533, 655, 675, 715, 733}, 
+											100, 20, new String[]{"|", "|", "|", "|", "|", "|", "|", "|", 
+																   "|", "|", "|", "|", "|", "|", "|", "|"});
+	
 		// Left Side Corner Brackets
-		addSideBracketLines(405, new int[] { 95, 295, 495, 695 }, 100, 20, new String[] { "|--", "|--", "|--", "|--" });
-
+		addSideBracketLines(405, new int[]{95, 295, 495, 695}, 100, 20, new String[]{"|--", "|--", "|--", "|--"});
+	
 		// Right Side Corner Brackets (Shifted slightly left)
-		addSideBracketLines(1087, new int[] { 95, 295, 495, 695 }, 100, 20,
-				new String[] { "--|", "--|", "--|", "--|" });
+		addSideBracketLines(1087, new int[]{95, 295, 495, 695}, 100, 20, new String[]{"--|", "--|", "--|", "--|"});
 	}
 
 	public void displayAdvanceRound5() {
+		System.out.println("Displaying Advance Round 5 Brackets..."); // Debugging log
+	
 		// Left Side Horizontal Bracket Lines
-		addSideBracketLines(525, new int[] { 95, 295, 495, 695 }, 100, 20, new String[] { "---", "---", "---", "---" });
-
+		addSideBracketLines(525, new int[]{95, 295, 495, 695}, 100, 20, new String[]{"---", "---", "---", "---"});
+	
 		// Left Side Vertical Bracket Lines
-		addSideBracketLines(545, new int[] { 110, 130, 150, 170, 190, 230, 250, 270, 290,
-				510, 530, 550, 570, 610, 630, 650, 670, 690 },
-				100, 20,
-				new String[] { "|", "|", "|", "|", "|", "|", "|", "|", "|",
-						"|", "|", "|", "|", "|", "|", "|", "|", "|" });
-
+		addSideBracketLines(545, new int[]{110, 130, 150, 170, 190, 230, 250, 270, 290, 
+										   510, 530, 550, 570, 610, 630, 650, 670, 690}, 
+										   100, 20, 
+										   new String[]{"|", "|", "|", "|", "|", "|", "|", "|", "|", 
+														"|", "|", "|", "|", "|", "|", "|", "|", "|"});
+	
 		// Left Side Corner Brackets
-		addSideBracketLines(545, new int[] { 210, 590 }, 100, 20, new String[] { "|--", "|--" });
-
+		addSideBracketLines(545, new int[]{210, 590}, 100, 20, new String[]{"|--", "|--"});
+	
 		// Right Side Horizontal Bracket Lines
-		addSideBracketLines(963, new int[] { 95, 295, 495, 695 }, 100, 20, new String[] { "---", "---", "---", "---" });
-
+		addSideBracketLines(963, new int[]{95, 295, 495, 695}, 100, 20, new String[]{"---", "---", "---", "---"});
+	
 		// Right Side Vertical Bracket Lines
-		addSideBracketLines(963, new int[] { 110, 130, 150, 170, 190, 230, 250, 270, 290,
-				510, 530, 550, 570, 610, 630, 650, 670, 690 },
-				100, 20,
-				new String[] { "|", "|", "|", "|", "|", "|", "|", "|", "|",
-						"|", "|", "|", "|", "|", "|", "|", "|", "|" });
-
+		addSideBracketLines(963, new int[]{110, 130, 150, 170, 190, 230, 250, 270, 290, 
+										   510, 530, 550, 570, 610, 630, 650, 670, 690}, 
+										   100, 20, 
+										   new String[]{"|", "|", "|", "|", "|", "|", "|", "|", "|", 
+														"|", "|", "|", "|", "|", "|", "|", "|", "|"});
+	
 		// Right Side Corner Brackets (Adjusted)
-		addSideBracketLines(947, new int[] { 210, 590 }, 100, 20, new String[] { "--|", "--|" });
-
+		addSideBracketLines(947, new int[]{210, 590}, 100, 20, new String[]{"--|", "--|"});
+	
 		// Update frame after adding components
 		frame.revalidate();
 		frame.repaint();
 	}
-
+	
 	public void displayAdvanceRound6() {
 		// Left side horizontal bracket label (Move south a bit)
-		addSideBracketLines(668, new int[] { 208 }, 100, 20, new String[] { "---" }); // Moved down
-
+		addSideBracketLines(668, new int[]{208}, 100, 20, new String[]{"---"}); // Moved down
+	
 		// Left side vertical bracket lines
-		int[] leftYPositions = { 213, 233, 253, 273, 293, 313, 333, 353, 373, 393, 413, 433, 453, 473, 493, 513, 533,
-				553, 576 };
+		int[] leftYPositions = {213, 233, 253, 273, 293, 313, 333, 353, 373, 393, 413, 433, 453, 473, 493, 513, 533, 553, 576};
 		String[] leftLabels = new String[leftYPositions.length];
 		Arrays.fill(leftLabels, "|");
 
-		addSideBracketLines(688, leftYPositions, 100, 20, leftLabels);
-
+		addSideBracketLines(688, leftYPositions, 100, 20, leftLabels); 
+	
 		// Left side final horizontal bracket label
-		addSideBracketLines(665, new int[] { 587 }, 100, 20, new String[] { "---" });
-
+		addSideBracketLines(665, new int[]{587}, 100, 20, new String[]{"---"}); 
+	
 		// Right side horizontal bracket label
-		addSideBracketLines(822, new int[] { 208 }, 100, 20, new String[] { "---" });
-
+		addSideBracketLines(822, new int[]{208}, 100, 20, new String[]{"---"}); 
+	
 		// Right side vertical bracket lines
-		int[] rightYPositions = { 213, 233, 253, 273, 293, 313, 333, 353, 373, 393, 413, 433, 453, 473, 493, 513, 533,
-				553, 576 };
+		int[] rightYPositions = {213, 233, 253, 273, 293, 313, 333, 353, 373, 393, 413, 433, 453, 473, 493, 513, 533, 553, 576};
 		String[] rightLabels = new String[rightYPositions.length];
 		Arrays.fill(rightLabels, "|");
-
+	
 		addSideBracketLines(820, rightYPositions, 100, 20, rightLabels);
-
+	
 		// Right side final horizontal bracket label
-		addSideBracketLines(820, new int[] { 587 }, 100, 20, new String[] { "---" });
+		addSideBracketLines(820, new int[]{587}, 100, 20, new String[]{"---"}); 
+		
+		JLabel label3067 = new JLabel("--|");
+		label3067.setBounds(804, 253, 100, 20);
+		frame.add(label3067);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLayout(null);
+		frame.setVisible(true);
 
-		addSideBracketLines(804, new int[] { 253 }, 100, 20, new String[] { "--|" });
-		addSideBracketLines(687, new int[] { 492 }, 100, 20, new String[] { " --" });
+		JLabel label298 = new JLabel(" --");
+		label298.setBounds(687, 492, 100, 20);
+		frame.add(label298);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLayout(null);
+		frame.setVisible(true);
 
+	
 		// Champion label in the center
-		addSideBracketLines(705, new int[] { 353 }, 100, 20, new String[] { "    Champion" });
+		addSideBracketLines(705, new int[]{353}, 100, 20, new String[]{"    Champion"}); 
 	}
-
-	// display the board
-	public void displayBoard(){
+	
+	// display the cosmetic board
+	public void cosmetic() {
 
 		// round 1 advance round 2
 		displayAdvanceRound2();
@@ -314,10 +352,13 @@ public class Interface {
 	}
 
 	public void addNewTeam() {
+		JFrame newTeamWindow = new JFrame();
 		frame2 = new JFrame("New Team");
 		frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		frame2.setPreferredSize(new Dimension(400, 400));
 		frame2.setVisible(true);
+		this.frame2 = frame2;
 
 		JLabel label1 = new JLabel("Team Name: ");
 		JLabel label2 = new JLabel("Wins: ");
@@ -371,19 +412,20 @@ public class Interface {
 		Simulator s = new Simulator();
 		Bracket b = new Bracket(filename);
 		Interface i = new Interface();
-
-		JFrame frame = new JFrame();
-		frame = new JFrame("March Madness");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		i.addSimulateButton();
-		frame.setVisible(true);
-
+	
+		// Use the frame created in the Interface constructor; maximize it if desired
+		i.frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+	
 		b.addTeams();
 		ArrayList<String> teamString = b.output();
-		i.displayBoard();
+	
+		i.cosmetic();
 		i.addSimulateButton();
 		i.addShuffleButton();
 		i.displayRoundOne(teamString);
+	
+		// Refresh the frame so that all components are rendered correctly
+		i.frame.revalidate();
+		i.frame.repaint();
 	}
-}
+}	
