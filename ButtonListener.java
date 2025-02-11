@@ -18,7 +18,7 @@ public class ButtonListener implements ActionListener {
             if (rounds<8){
                 a = b.output();
                 i.Display(a,rounds);
-                i.cosmetic();
+                i.displayBoard();
                 i.addSimulateButton();
                 i.addShuffleButton();
             }
